@@ -1,6 +1,6 @@
 {
   "name": "bunzee",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "very simplistic ts bundler and minifier using rollup and terser",
   "bin": {
     "bunzee": "index.js"
