@@ -1,11 +1,13 @@
 #!/usr/bin/env node
 
-const rollup = require('rollup')
-const nodeResolve = require('@rollup/plugin-node-resolve').default
-const typescript = require('@rollup/plugin-typescript')
-const cleanup = require('rollup-plugin-cleanup')
-const terser = require('rollup-plugin-terser').terser
 const brotliSize = require('brotli-size').default
+const cleanup = require('rollup-plugin-cleanup')
+const commonjs = require('@rollup/plugin-commonjs')
+const json = require('@rollup/plugin-json')
+const nodeResolve = require('@rollup/plugin-node-resolve').default
+const rollup = require('rollup')
+const terser = require('rollup-plugin-terser').terser
+const typescript = require('@rollup/plugin-typescript')
 
 const argv = process.argv.slice(2)
 const compress =
@@ -22,10 +24,12 @@ const format = 'es'
 const inputOptions = {
   input,
   plugins: [
+    json(),
+    commonjs(),
     nodeResolve(),
     typescript({
       tsconfig: false,
-      include: ['**/*'],
+      include: ['**/*.ts', '**/*.tsx'],
       compilerOptions: {
         module: 'esnext',
         target: 'esnext',
